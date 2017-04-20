@@ -1,3 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
+  # Forward port other than 2222
+  # config.vm.network :forwarded_port, guest: 80, host: 8800, host_ip: "127.0.0.1"
+  # Share folder
+  # config.vm.synced_folder "/dir/on/host/Mac/or/Linux", "/dir/on/guest/ubuntu"
 end
