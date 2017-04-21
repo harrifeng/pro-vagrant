@@ -5,10 +5,26 @@ Vagrant.configure("2") do |config|
   # manual ip
   config.vm.provision "shell",
                       run: "always",
-                      inline: "ifconfig eth1 192.168.1.74 netmask 255.255.252.0"
+                      inline: "ifconfig eth1 192.168.1.75 netmask 255.255.252.0"
 
-  # # router
+  # # remote auto config
+  # config.vm.provision "shell",
+  #                     run: "always",
+  #                     inline: "route del -net 192.168.0.0/22"
+  #
+  # # make the 192.168.0.* reachable
+  # config.vm.provision "shell",
+  #                     run: "always",
+  #                     inline: "route add -net 192.168.0.0 netmask 255.255.252.0 dev eth1"
+
+  # router
   config.vm.provision "shell",
                       run: "always",
                       inline: "route add default gw 192.168.0.253"
+
+  # dns
+  config.vm.provision "shell",
+                      run: "always",
+                      inline: "echo 'nameserver 192.168.0.7' > /etc/resolv.conf"
+
 end
